@@ -117,22 +117,22 @@
       font-size: 14px !important;
     }
 
-    .task-wrapper {
+        .task-wrapper {
       display: flex; flex-direction: column; align-items: center;
       gap: 16px; padding: 16px 20px;
       user-select: none; -webkit-user-select: none;
     }
     .task-timer-bar {
       width: 100%; max-width: 360px; height: 4px;
-      background: #eee; border-radius: 2px; overflow: hidden;
+      background: #ddd; border-radius: 2px; overflow: hidden;
     }
     .task-timer-fill {
-      height: 100%; background: #4A7AB5;
-      border-radius: 2px; transition: width 1s linear;
+      height: 100%; background: #999;
+      border-radius: 2px; width: 100%;
     }
     .task-timer-text {
       font-size: 16px; font-family: 'DM Mono', monospace;
-      color: #4A7AB5; font-weight: 400;
+      color: #666; font-weight: 400;
     }
     .circle-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
@@ -143,31 +143,19 @@
       position: relative; width: 72px; height: 72px;
       border: none; background: none; padding: 0;
       -webkit-tap-highlight-color: transparent; outline: none; cursor: default;
-      transition: transform 0.15s ease;
     }
     .circle-btn.active { cursor: pointer; }
-    .circle-btn.active:active { transform: scale(0.95); }
     .disk {
       width: 64px; height: 64px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       margin: 4px auto 0;
-      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
-                  box-shadow 0.3s ease, background 0.3s ease;
+      background: #9eaeae;
     }
-    .disk.inactive { background: #B0C4DE; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
-    .disk.active { background: #3B7DD8; box-shadow: 0 0 0 4px rgba(59,125,216,0.25), 0 4px 16px rgba(59,125,216,0.3); }
-    .disk.done { background: #A8B8C8; box-shadow: 0 1px 4px rgba(0,0,0,0.06); opacity: 0.5; }
-    .arrow-svg { width: 28px; height: 28px; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); }
-    .arrow-svg path { fill: rgba(255,255,255,0.9); }
-    .disk.inactive .arrow-svg path { fill: rgba(255,255,255,0.5); }
-    .disk.done .arrow-svg path { fill: rgba(255,255,255,0.4); }
-    .circle-label { font-size: 11px; color: #aaa; height: 14px; }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 0 4px rgba(59,125,216,0.25), 0 4px 16px rgba(59,125,216,0.3); }
-      50% { box-shadow: 0 0 0 6px rgba(59,125,216,0.15), 0 4px 20px rgba(59,125,216,0.25); }
-    }
-    .disk.active { animation: pulse 2s ease-in-out infinite; }
-
+    .disk.active { background: #6d8a8a; }
+    .disk.done { background: #8a9e9e; opacity: 0.6; }
+    .arrow-svg { width: 28px; height: 28px; }
+    .arrow-svg path { fill: rgba(255,255,255,0.7); }
+    .disk.done .arrow-svg path { fill: rgba(255,255,255,0.3); }
     .end-screen {
       font-family: 'Fraunces', serif; text-align: center; padding: 40px 20px;
       max-width: 600px; margin: 0 auto;
@@ -210,7 +198,7 @@ var jsPsychCircleRotation = (function () {
         h += '<div class="circle-grid">';
         for (var i = 0; i < TOTAL; i++) {
           var c = circles[i], d = c >= CLICKS, a = i === activeIdx && !d, rot = c * 90;
-          h += '<div class="circle-cell"><button class="circle-btn'+(a?' active':'')+'" data-i="'+i+'"'+(a?'':' disabled')+'><div class="disk '+(d?'done':a?'active':'inactive')+'"><div style="transform:rotate('+rot+'deg);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1)">'+ARROW+'</div></div></button><span class="circle-label">'+(d?'✓':a?c+'/4':'')+'</span></div>';
+          h += '<div class="circle-cell"><button class="circle-btn'+(a?' active':'')+'" data-i="'+i+'"'+(a?'':' disabled')+'><div class="disk '+(d?'done':a?'active':'inactive')+'"><div style="transform:rotate('+rot+'deg)">'+ARROW+'</div></div></button></div>';
         }
         h += '</div></div>';
         el.innerHTML = h;
@@ -255,7 +243,6 @@ var jsPsychCircleRotation = (function () {
   P.info = info;
   return P;
 })();
-
 
 /* ═══════════════════════════════════════════════════════════════
    HELPERS
@@ -415,23 +402,22 @@ var page6 = {
 };
 
 
-/* ── PAGE 7: Task instructions ── */
+/* ── PAGE 7: Task instructions (без слов о скорости, точности, старании) ── */
 var page7 = {
   type: jsPsychHtmlButtonResponse,
   stimulus:
     '<div class="page">' +
     '<h1>Инструкция к заданию</h1>' +
-    '<p>На экране вы увидите восемь синих дисков (кругов), расположенных в два ряда по четыре. На каждом диске есть стрелка, указывающая от центра к краю.</p>' +
-    '<p>В начале задания первый диск будет подсвечен.</p>' +
-    '<p>Ваша задача — кликать на подсвеченный диск. Каждый клик поворачивает стрелку на четверть оборота по часовой стрелке.</p>' +
-    '<p>Когда стрелка на текущем диске совершит полный оборот (после четырёх кликов), подсветка автоматически перейдёт к следующему диску. Продолжайте кликать на подсвеченные диски, пока задание не завершится.</p>' +
-    '<p>Пожалуйста, работайте, не отвлекаясь. Задание займёт 5 минут.</p>' +
+    '<p>На экране вы увидите восемь синих кругов, расположенных в два ряда по четыре. Внутри каждого круга есть стрелка.</p>' +
+    '<p>В начале задания первый круг будет выделен. Ваша задача — <strong>нажимать на выделенный круг</strong>. При каждом нажатии стрелка будет поворачиваться.</p>' +
+    '<p>После четырёх нажатий стрелка сделает полный оборот, и выделение перейдёт к следующему кругу.</p>' +
+    '<p><strong>Пожалуйста, выполняйте задание в своём обычном темпе. Не нужно стараться делать это быстрее или точнее. Скорость и правильность не имеют значения.</strong></p>' +
+    '<p>Задание длится 5 минут и завершится автоматически.</p>' +
     '<p class="note">Нажмите «Далее», чтобы перейти к заданию.</p>' +
     '</div>',
   choices: ['Далее'],
   data: { trial_label: 'task_instructions' }
 };
-
 
 /* ── PAGE 8: Circle task ── */
 var page8 = {
