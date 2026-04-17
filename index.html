@@ -498,6 +498,9 @@ var page11_debrief = {
     '<p>Если Вы хотите получить информацию о результатах данного исследования, оставьте, пожалуйста, адрес Вашей электронной почты ниже.</p>' +
     '<p>Все Ваши ответы анонимны и будут использоваться только в обобщённом виде. Если у Вас есть вопросы, Вы можете связаться со мной по адресу: deniolly@gmail.com.</p>' +
     '<p><strong>Ещё раз спасибо!</strong></p>' +
+    questions: [
+    { prompt: "Ваш адрес электронной почты (необязательно):", name: "email", required: false, placeholder: "email@example.com" }
+  ],
     '<div style="background: #f0f0f0; border-radius: 16px; padding: 20px; margin: 20px 0;">' +
     '<p style="font-weight: 500; margin-bottom: 10px;">🎉 Обещанные коты! 🎉</p>' +
     '<div style="display: flex; flex-direction: column; gap: 15px; align-items: center;">' +
@@ -509,9 +512,6 @@ var page11_debrief = {
     '<img src="https://github.com/deniolly-del/myresearch/blob/main/cat6.jpg?raw=true" alt="Кот 6" style="max-width: 100%; border-radius: 12px;">' +
     '</div></div>' +
     '</div>',
-  questions: [
-    { prompt: "Ваш адрес электронной почты (необязательно):", name: "email", required: false, placeholder: "email@example.com" }
-  ],
   button_label: 'Завершить',
   data: { trial_label: 'debrief_email' }
 };
