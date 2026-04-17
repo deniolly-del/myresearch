@@ -117,7 +117,7 @@
       font-size: 14px !important;
     }
 
-        .task-wrapper {
+    .task-wrapper {
       display: flex; flex-direction: column; align-items: center;
       gap: 16px; padding: 16px 20px;
       user-select: none; -webkit-user-select: none;
@@ -156,6 +156,7 @@
     .arrow-svg { width: 28px; height: 28px; }
     .arrow-svg path { fill: rgba(255,255,255,0.7); }
     .disk.done .arrow-svg path { fill: rgba(255,255,255,0.3); }
+
     .end-screen {
       font-family: 'Fraunces', serif; text-align: center; padding: 40px 20px;
       max-width: 600px; margin: 0 auto;
@@ -488,19 +489,13 @@ var save_data = {
 };
 
 
-/* ── PAGE 11: Debrief + optional email ── */
+/* ── PAGE 11: Debrief + memes + optional email ── */
 var page11_debrief = {
   type: jsPsychSurveyText,
   preamble:
     '<div class="end-screen">' +
     '<h1>Спасибо за участие в исследовании!</h1>' +
     '<p>На самом деле мы изучали, как разные люди переживают скуку и как это связано с их личностными особенностями (предрасположенностью к скуке и чувством агентности, то есть контроля над своими действиями). Задание было специально подобрано как монотонное, чтобы вызвать эмоцию скуки.</p>' +
-    '<p>Если Вы хотите получить информацию о результатах данного исследования, оставьте, пожалуйста, адрес Вашей электронной почты ниже.</p>' +
-    '<p>Все Ваши ответы анонимны и будут использоваться только в обобщённом виде. Если у Вас есть вопросы, Вы можете связаться со мной по адресу: deniolly@gmail.com.</p>' +
-    '<p><strong>Ещё раз спасибо!</strong></p>' +
-    questions: [
-    { prompt: "Ваш адрес электронной почты (необязательно):", name: "email", required: false, placeholder: "email@example.com" }
-  ],
     '<div style="background: #f0f0f0; border-radius: 16px; padding: 20px; margin: 20px 0;">' +
     '<p style="font-weight: 500; margin-bottom: 10px;">🎉 Обещанные коты! 🎉</p>' +
     '<div style="display: flex; flex-direction: column; gap: 15px; align-items: center;">' +
@@ -511,9 +506,15 @@ var page11_debrief = {
     '<img src="https://github.com/deniolly-del/myresearch/blob/main/cat5.jpg?raw=true" alt="Кот 5" style="max-width: 100%; border-radius: 12px;">' +
     '<img src="https://github.com/deniolly-del/myresearch/blob/main/cat6.jpg?raw=true" alt="Кот 6" style="max-width: 100%; border-radius: 12px;">' +
     '</div></div>' +
+    '<p>Если Вы хотите получить информацию о результатах данного исследования, оставьте, пожалуйста, адрес Вашей электронной почты ниже.</p>' +
+    '<p>Все Ваши ответы анонимны и будут использоваться только в обобщённом виде. Если у Вас есть вопросы, Вы можете связаться со мной по адресу: deniolly@gmail.com.</p>' +
+    '<p><strong>Ещё раз спасибо!</strong></p>' +
     '</div>',
+  questions: [
+    { prompt: "Ваш адрес электронной почты (необязательно):", name: "email", required: false, placeholder: "email@example.com" }
+  ],
   button_label: 'Завершить',
-  data: { trial_label: 'debrief_email' }
+  data: { trial_label: 'debrief_email_memes' }
 };
 
 
@@ -551,7 +552,7 @@ jsPsych.run([
   page9,       // PANAS post
   page10,      // technical questions (2 questions)
   save_data,   // save to OSF
-  page11_debrief, // debrief + email
+  page11_debrief, // debrief + email + memes
   save_final,  // save including email
   done         // final screen
 ]);
