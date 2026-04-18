@@ -17,9 +17,8 @@
 
   <!-- DataPipe -->
   <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe@0.4"></script>
-
   <style>
-       @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Fraunces:opsz,wght@9..144,300;9..144,500&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Fraunces:opsz,wght@9..144,300;9..144,500&display=swap');
 
     body { background: #fafafa; touch-action: manipulation; }
     * { touch-action: manipulation; }
@@ -50,76 +49,66 @@
     .page li { margin-bottom: 6px; }
     .page .note { font-size: 14px; color: #888; font-family: 'DM Mono', monospace; }
 
-    /* Улучшенные стили для опросников */
-    .jspsych-survey-likert-opts {
-      flex-direction: column !important;
-      align-items: flex-start !important;
-      width: 100% !important;
-      gap: 12px !important;
-      padding: 15px 0 10px 0 !important;
-      overflow: visible !important;
-      margin-top: 8px !important;
-    }
-    .jspsych-survey-likert-opts li {
-      width: 100% !important;
-      text-align: left !important;
-      padding: 8px 12px 8px 16px !important;
-      border-radius: 8px;
-      transition: background 0.15s;
-      display: flex !important;
-      align-items: center !important;
-    }
-    .jspsych-survey-likert-opts li:hover {
-      background: rgba(0,0,0,0.03);
-    }
-    .jspsych-survey-likert-opt-label {
-      font-size: 14px !important;
-      display: flex !important;
-      align-items: center !important;
-      gap: 10px !important;
-      cursor: pointer;
-      min-height: 28px !important;
-      line-height: 1.4 !important;
-      width: 100% !important;
-    }
-    .jspsych-survey-likert-opt-label input[type="radio"] {
-      margin: 0 !important;
-      flex-shrink: 0;
-      width: 18px;
-      height: 18px;
-    }
-    .jspsych-survey-likert-opt-label span {
-      flex: 1;
-      padding-right: 8px;
-    }
+    /* Стили для опросников — исправлено наложение кнопки на текст */
     .jspsych-survey-likert-statement { 
       font-size: 16px !important; 
-      margin-bottom: 6px !important;
+      margin-bottom: 8px !important;
       font-family: 'Fraunces', serif !important;
       font-weight: 500;
       color: #1a1a1a;
     }
-    .jspsych-survey-likert-opts { 
-      font-size: 13px !important; 
-      font-family: 'DM Mono', monospace !important;
+    
+    .jspsych-survey-likert-opts {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      width: 100% !important;
+      gap: 12px !important;
+      padding: 5px 0 15px 0 !important;
+      margin-top: 5px !important;
+      overflow: visible !important;
     }
-    .jspsych-survey-likert-opt-label { font-size: 12px !important; }
-        /* Разделительная линия с отступами */
+    
+    .jspsych-survey-likert-opts li {
+      width: 100% !important;
+      list-style: none !important;
+      margin: 0 !important;
+      padding: 6px 0 !important;
+      display: block !important;
+    }
+    
+    .jspsych-survey-likert-opt-label {
+      font-size: 13px !important;
+      font-family: 'DM Mono', monospace !important;
+      display: flex !important;
+      align-items: flex-start !important;
+      gap: 12px !important;
+      cursor: pointer;
+      line-height: 1.4 !important;
+      width: 100% !important;
+    }
+    
+    .jspsych-survey-likert-opt-label input[type="radio"] {
+      margin: 2px 0 0 0 !important;
+      flex-shrink: 0 !important;
+      width: 18px;
+      height: 18px;
+    }
+    
+    .jspsych-survey-likert-opt-label span {
+      flex: 1;
+      display: inline-block;
+      padding-right: 8px;
+    }
+
+    /* Разделительная линия — отступы сверху 3мм, снизу 3мм */
     .jspsych-survey-likert::before {
       content: '';
       display: block;
       height: 1px;
       background: #ddd;
-      margin: 20px 0 20px 0;
+      margin: 3mm 0 3mm 0 !important;
     }
-    /* Отступ перед ответами после линии */
-    .jspsych-survey-likert-opts {
-      margin-top: 3mm !important;
-    }
-    /* Отступ от вопроса до линии */
-    .jspsych-survey-likert-statement {
-      margin-bottom: 3mm !important;
-    }
+
     .jspsych-survey-multi-choice-question { 
       font-size: 16px !important; 
       font-family: 'Fraunces', serif !important;
@@ -178,7 +167,6 @@
       background-color: #3a6a9e !important;
     }
 
-    /* Контейнер для кнопки — чтобы не прилипала к низу */
     .jspsych-content-wrapper {
       display: flex;
       flex-direction: column;
