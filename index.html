@@ -63,7 +63,7 @@
     .jspsych-survey-likert-opts li {
       width: 100% !important;
       text-align: left !important;
-      padding: 8px 12px 8px 8px !important;
+      padding: 8px 12px 8px 16px !important;
       border-radius: 8px;
       transition: background 0.15s;
       display: flex !important;
@@ -104,16 +104,22 @@
       font-family: 'DM Mono', monospace !important;
     }
     .jspsych-survey-likert-opt-label { font-size: 12px !important; }
-
-    /* Разделительная линия с отступами */
+        /* Разделительная линия с отступами */
     .jspsych-survey-likert::before {
       content: '';
       display: block;
       height: 1px;
       background: #ddd;
-      margin: 20px 0 25px 0;
+      margin: 20px 0 20px 0;
     }
-
+    /* Отступ перед ответами после линии */
+    .jspsych-survey-likert-opts {
+      margin-top: 3mm !important;
+    }
+    /* Отступ от вопроса до линии */
+    .jspsych-survey-likert-statement {
+      margin-bottom: 3mm !important;
+    }
     .jspsych-survey-multi-choice-question { 
       font-size: 16px !important; 
       font-family: 'Fraunces', serif !important;
