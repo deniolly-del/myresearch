@@ -9,7 +9,6 @@
   <script src="https://unpkg.com/jspsych@7.3.4"></script>
   <script src="https://unpkg.com/@jspsych/plugin-html-button-response@1.1.3"></script>
   <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.3"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.3"></script>
   <script src="https://unpkg.com/@jspsych/plugin-survey-multi-choice@1.1.3"></script>
   <script src="https://unpkg.com/@jspsych/plugin-survey-text@1.1.3"></script>
   <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.3"></script>
@@ -48,62 +47,6 @@
     .page ul { margin: 10px 0 14px 20px; }
     .page li { margin-bottom: 6px; }
     .page .note { font-size: 14px; color: #888; font-family: 'DM Mono', monospace; }
-
-/* ===== Likert mobile fix ===== */
-
-.jspsych-survey-likert-question {
-  margin: 0 0 20px 0 !important;
-  padding: 0 0 20px 0 !important;
-  border-bottom: 1px solid #ddd !important;
-}
-
-.jspsych-survey-likert-question:last-child {
-  border-bottom: none !important;
-}
-
-.jspsych-survey-likert-statement {
-  font-family: 'Fraunces', serif !important;
-  font-size: 18px !important;
-  font-weight: 400 !important;
-  line-height: 1.5 !important;
-  margin: 0 0 12px 0 !important;
-  padding: 0 !important;
-  color: #1a1a1a !important;
-}
-
-.jspsych-survey-likert-opts {
-  list-style: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-.jspsych-survey-likert-opts li {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 12px !important;
-  padding: 8px 0 !important;
-  margin: 0 !important;
-  width: 100% !important;
-}
-
-.jspsych-survey-likert-opts label {
-  flex: 1 !important;
-  font-family: 'DM Mono', monospace !important;
-  font-size: 14px !important;
-  line-height: 1.4 !important;
-  margin: 0 !important;
-  padding-right: 10px !important;
-}
-
-.jspsych-survey-likert-opts input[type="radio"] {
-  width: 22px !important;
-  height: 22px !important;
-  margin: 0 !important;
-  flex-shrink: 0 !important;
-  position: static !important;
-}
-
     .jspsych-survey-multi-choice-question { 
       font-size: 16px !important; 
       font-family: 'Fraunces', serif !important;
@@ -305,7 +248,12 @@ var L7 = ["1 – полностью не согласен", "2 – не согл
 var L5sc = ["1 – совершенно не согласен", "2 – скорее не согласен", "3 – нечто среднее", "4 – скорее согласен", "5 – совершенно согласен"];
 
 function likertQ(prompt, labels, name) {
-  return { prompt: prompt, labels: labels, required: true, name: name };
+  return {
+    prompt: prompt,
+    options: labels,
+    required: true,
+    name: name
+  };
 }
 
 
@@ -371,7 +319,7 @@ var boredom_items = [
 ];
 
 var page3 = {
-  type: jsPsychSurveyLikert,
+  type: jsPsychSurveyMultiChoice,
   preamble: '<div class="page"><p>Оцените, пожалуйста, каждое утверждение по шкале от 1 («полностью не согласен») до 7 («полностью согласен»).</p></div>',
   questions: boredom_items.map(function(item, i) {
     return likertQ(item, L7, 'boredom_' + (i+1));
@@ -399,7 +347,7 @@ var agency_items = [
 ];
 
 var page4 = {
-  type: jsPsychSurveyLikert,
+  type: jsPsychSurveyMultiChoice,
   preamble: '<div class="page"><p>Пожалуйста, оцените свое согласие или несогласие с каждым утверждением по шкале от 1 («полностью не согласен») до 7 («полностью согласен»).</p></div>',
   questions: agency_items.map(function(item, i) {
     return likertQ(item, L7, 'agency_' + (i+1));
@@ -427,7 +375,7 @@ var selfcontrol_items = [
 ];
 
 var page5 = {
-  type: jsPsychSurveyLikert,
+  type: jsPsychSurveyMultiChoice,
   preamble: '<div class="page"><p>В ответах под каждым утверждением, пожалуйста, отметьте, насколько верно каждый из пунктов описывает Вас (привычное для Вас состояние).</p></div>',
   questions: selfcontrol_items.map(function(item, i) {
     return likertQ(item, L5sc, 'selfcontrol_' + (i+1));
@@ -446,7 +394,7 @@ var panas_pre_items = [
 ];
 
 var page6 = {
-  type: jsPsychSurveyLikert,
+  type: jsPsychSurveyMultiChoice,
   preamble: '<div class="page"><p>Этот опросник состоит из перечня прилагательных, которые описывают различные чувства и эмоции. Прочитайте каждое прилагательное и отметьте, в какой мере Вы чувствуете себя так <strong>сейчас</strong> (в настоящий момент).</p></div>',
   questions: panas_pre_items.map(function(item, i) {
     return likertQ(item, L5, 'panas_pre_' + (i+1));
@@ -490,7 +438,7 @@ var panas_post_items = [
 ];
 
 var page9 = {
-  type: jsPsychSurveyLikert,
+  type: jsPsychSurveyMultiChoice,
   preamble: '<div class="page"><p>Прочитайте, пожалуйста, каждое прилагательное и отметьте, в какой мере Вы чувствовали себя <strong>ВО ВРЕМЯ ВЫПОЛНЕНИЯ ЗАДАНИЯ</strong>.</p></div>',
   questions: panas_post_items.map(function(item, i) {
     return likertQ(item, L5, 'panas_post_' + (i+1));
