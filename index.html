@@ -19,7 +19,7 @@
   <script src="https://unpkg.com/@jspsych-contrib/plugin-pipe@0.4"></script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Fraunces:opsz,wght@9..144,300;9..144,500&display=swap');
+       @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400&family=Fraunces:opsz,wght@9..144,300;9..144,500&display=swap');
 
     body { background: #fafafa; touch-action: manipulation; }
     * { touch-action: manipulation; }
@@ -44,26 +44,30 @@
       max-width: 620px;
       margin: 0 auto;
     }
-    .page h1 { font-size: 28px; font-weight: 500; margin-bottom: 20px; text-align: center; }
-    .page p { margin-bottom: 14px; }
+    .page h1 { font-size: 28px; font-weight: 500; margin-bottom: 20px; text-align: center; color: #1a1a1a; }
+    .page p { margin-bottom: 14px; color: #333; }
     .page ul { margin: 10px 0 14px 20px; }
     .page li { margin-bottom: 6px; }
     .page .note { font-size: 14px; color: #888; font-family: 'DM Mono', monospace; }
 
+    /* Улучшенные стили для опросников */
     .jspsych-survey-likert-opts {
       flex-direction: column !important;
       align-items: flex-start !important;
       width: 100% !important;
-      gap: 8px !important;
-      padding: 10px 0 !important;
+      gap: 12px !important;
+      padding: 15px 0 10px 0 !important;
       overflow: visible !important;
+      margin-top: 8px !important;
     }
     .jspsych-survey-likert-opts li {
       width: 100% !important;
       text-align: left !important;
-      padding: 6px 12px !important;
-      border-radius: 6px;
+      padding: 8px 12px 8px 8px !important;
+      border-radius: 8px;
       transition: background 0.15s;
+      display: flex !important;
+      align-items: center !important;
     }
     .jspsych-survey-likert-opts li:hover {
       background: rgba(0,0,0,0.03);
@@ -72,19 +76,28 @@
       font-size: 14px !important;
       display: flex !important;
       align-items: center !important;
-      gap: 8px !important;
+      gap: 10px !important;
       cursor: pointer;
-      min-height: 24px !important;
-      line-height: 1.5 !important;
+      min-height: 28px !important;
+      line-height: 1.4 !important;
+      width: 100% !important;
     }
     .jspsych-survey-likert-opt-label input[type="radio"] {
       margin: 0 !important;
       flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+    }
+    .jspsych-survey-likert-opt-label span {
+      flex: 1;
+      padding-right: 8px;
     }
     .jspsych-survey-likert-statement { 
       font-size: 16px !important; 
-      margin-bottom: 4px !important;
+      margin-bottom: 6px !important;
       font-family: 'Fraunces', serif !important;
+      font-weight: 500;
+      color: #1a1a1a;
     }
     .jspsych-survey-likert-opts { 
       font-size: 13px !important; 
@@ -92,18 +105,45 @@
     }
     .jspsych-survey-likert-opt-label { font-size: 12px !important; }
 
+    /* Разделительная линия с отступами */
+    .jspsych-survey-likert::before {
+      content: '';
+      display: block;
+      height: 1px;
+      background: #ddd;
+      margin: 20px 0 25px 0;
+    }
+
     .jspsych-survey-multi-choice-question { 
       font-size: 16px !important; 
       font-family: 'Fraunces', serif !important;
+      margin-bottom: 15px !important;
     }
-    .jspsych-survey-multi-choice-option { 
-      font-size: 14px !important; 
+    .jspsych-survey-multi-choice-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 10px 0 20px 0;
+      padding-left: 10px;
+    }
+    .jspsych-survey-multi-choice-option {
+      font-size: 14px !important;
       font-family: 'DM Mono', monospace !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+    }
+    .jspsych-survey-multi-choice-option input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      margin: 0 !important;
+      flex-shrink: 0;
     }
 
     .jspsych-survey-text .jspsych-survey-text-question p {
       font-family: 'Fraunces', serif !important;
       font-size: 16px !important;
+      color: #333;
     }
 
     #jspsych-survey-html-form input[type="number"] {
@@ -112,9 +152,32 @@
       font-family: 'DM Mono', monospace;
     }
 
+    /* Кнопка "Далее" — выше, удобнее для нажатия */
     .jspsych-btn {
       font-family: 'DM Mono', monospace !important;
-      font-size: 14px !important;
+      font-size: 16px !important;
+      padding: 12px 28px !important;
+      margin: 30px auto 20px auto !important;
+      display: block !important;
+      background-color: #4a7ab5 !important;
+      color: white !important;
+      border: none !important;
+      border-radius: 40px !important;
+      cursor: pointer;
+      transition: background 0.2s;
+      position: relative;
+      top: 0;
+    }
+    .jspsych-btn:hover {
+      background-color: #3a6a9e !important;
+    }
+
+    /* Контейнер для кнопки — чтобы не прилипала к низу */
+    .jspsych-content-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: auto;
     }
 
     .task-wrapper {
